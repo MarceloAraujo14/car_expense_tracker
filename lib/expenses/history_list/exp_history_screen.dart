@@ -1,6 +1,6 @@
 import 'package:car_maintenance/expenses/data/expense_data.dart';
 import 'package:car_maintenance/expenses/expenses_graph.dart';
-import 'package:car_maintenance/expenses/expense_container.dart';
+import 'package:car_maintenance/expenses/history_list/expenses_list.dart';
 import 'package:car_maintenance/main.dart';
 import 'package:flutter/material.dart';
 
@@ -17,12 +17,18 @@ class _ExpenseHistoryScreen extends State<ExpensesHistoryScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Column(
-          children: [
-            ExpensesGraph(),
-            //
-            ExpensesHistoryList(),
-          ],
+        Expanded(
+          child: Column(
+            children: [
+              const ExpensesGraph(),
+              //
+              Expanded(
+                child: ExpensesHistoryList(
+                  expensesList: expenses,
+                ),
+              ),
+            ],
+          ),
         ),
         IconButton.filled(
           onPressed: () {
@@ -34,34 +40,6 @@ class _ExpenseHistoryScreen extends State<ExpensesHistoryScreen> {
           ),
           iconSize: 80,
         )
-      ],
-    );
-  }
-}
-
-class ExpensesHistoryList extends StatelessWidget {
-  const ExpensesHistoryList({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-            child: SizedBox(
-          height: 350,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              children: [
-                ...expenses.map(
-                  (exp) => ExpenseContainer(expense: exp),
-                ),
-              ],
-            ),
-          ),
-        ))
       ],
     );
   }

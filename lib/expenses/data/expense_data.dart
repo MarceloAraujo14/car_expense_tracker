@@ -20,4 +20,5 @@ final List<Expense> expenses = [
       description: ExpenseType.accessories.description,
       date: DateTime.now(),
       type: ExpenseType.accessories),
+
 ];
